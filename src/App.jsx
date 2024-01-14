@@ -48,7 +48,7 @@ function App() {
   return (
     <div className="grid h-screen place-items-center">
       <div className="mx-auto flex w-full flex-col rounded-lg md:flex-row md:bg-white md:p-4 lg:w-[1000px]">
-        <div className="flex h-44  justify-center gap-4 self-stretch  bg-sidebarMobile bg-cover bg-no-repeat  md:h-auto md:basis-1/3  md:flex-col md:justify-start md:gap-9 md:bg-sidebarDesktop  md:px-8 md:pt-12">
+        <div className="flex h-44 justify-center gap-4 self-stretch rounded-lg  bg-sidebarMobile bg-cover bg-no-repeat  md:h-auto md:basis-1/3  md:flex-col md:justify-start md:gap-9 md:bg-sidebarDesktop  md:px-8 md:pt-12">
           <div className="flex gap-4 pt-10 md:items-center md:pt-0">
             <div
               className={`grid h-10 w-10 place-items-center  rounded-full border text-xl ${
@@ -61,7 +61,11 @@ function App() {
             </div>
             <div className="hidden text-sm uppercase md:block">
               <p className="text-coolGray">Step 1</p>
-              <p className="text-lg text-white">Your info</p>
+              <p
+                className={`text-lg transition-colors duration-300 ${step === 1 ? 'text-white' : 'text-stone-300'}`}
+              >
+                Your info
+              </p>
             </div>
           </div>
           <div className="flex gap-4 pt-10 md:items-center md:pt-0">
@@ -76,7 +80,11 @@ function App() {
             </div>
             <div className="hidden text-sm uppercase md:block">
               <p className="text-coolGray">Step 2</p>
-              <p className="text-lg text-white">Select plan</p>
+              <p
+                className={`text-lg transition-colors duration-300 ${step === 2 ? 'text-white' : 'text-stone-300'}`}
+              >
+                Select plan
+              </p>
             </div>
           </div>
 
@@ -92,7 +100,11 @@ function App() {
             </div>
             <div className="hidden text-sm uppercase md:block">
               <p className="text-coolGray">Step 3</p>
-              <p className="text-lg text-white">Add-ons</p>
+              <p
+                className={`text-lg transition-colors duration-300 ${step === 3 ? 'text-white' : 'text-stone-300'}`}
+              >
+                Add-ons
+              </p>
             </div>
           </div>
           <div className="flex gap-4 pt-10 md:items-center md:pt-0">
@@ -107,7 +119,11 @@ function App() {
             </div>
             <div className="hidden text-sm uppercase md:block">
               <p className="text-coolGray">Step 4</p>
-              <p className="text-lg text-white">Summary</p>
+              <p
+                className={`text-lg transition-colors duration-300 ${step === 4 ? 'text-white' : 'text-stone-300'}`}
+              >
+                Summary
+              </p>
             </div>
           </div>
         </div>
