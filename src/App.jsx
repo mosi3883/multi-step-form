@@ -6,6 +6,9 @@ import Step4 from './components/Step4';
 
 function reducer(state, action) {
   switch (action.type) {
+    case 'steps/set': {
+      return { ...state, step: action.payload };
+    }
     case 'steps/next': {
       return { ...state, step: state.step + 1 };
     }
@@ -37,6 +40,16 @@ function App() {
   function handleNextStep(e) {
     e.preventDefault();
 
+    dispatch({ type: 'steps/next' });
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    // submit data to database
+    //
+
+    // next step
     dispatch({ type: 'steps/next' });
   }
 
@@ -142,7 +155,7 @@ function App() {
               step > 0 ? 'justify-between' : 'justify-end'
             } w-full px-20 py-6 `}
           >
-            {step > 1 && (
+            {step > 1 && step < 5 && (
               <button
                 onClick={handlePrevStep}
                 className="flex items-center gap-1 rounded border border-transparent px-3 py-2 text-coolGray transition-colors duration-300 hover:border-marineBlue hover:text-marineBlue"
@@ -156,6 +169,15 @@ function App() {
                 onClick={handleNextStep}
               >
                 <span> Next Step</span> <span className="text-xs">&rarr;</span>
+              </button>
+            )}
+
+            {step === 4 && (
+              <button
+                className="ml-auto flex items-center gap-1 rounded bg-purplishBlue px-3 py-2 text-white"
+                onClick={handleSubmit}
+              >
+                Confirm
               </button>
             )}
           </div>

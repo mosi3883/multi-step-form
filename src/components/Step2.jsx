@@ -8,7 +8,7 @@ function Step2({ dispatch, plan, planType }) {
         you have the option of monthly or yearly billing
       </p>
 
-      <div className="mb-8 flex flex-col gap-3 md:flex-row">
+      <div className="mb-8 flex select-none flex-col gap-3 md:flex-row">
         <div
           className={`flex flex-1 cursor-pointer items-center gap-4 rounded-md border px-4 py-2 hover:border-marineBlue md:flex-col md:items-start md:gap-7 ${plan === 'arcade' ? 'border-marineBlue bg-magnolia' : ''}`}
           onClick={() => dispatch({ type: 'plan/set', payload: 'arcade' })}

@@ -9,7 +9,7 @@ function Step3() {
       </p>
 
       <div className="flex flex-col items-stretch gap-4">
-        <label className="flex items-center gap-2 rounded-md border border-marineBlue p-4 shadow-sm">
+        <label className="flex select-none items-center gap-2 rounded-md border border-marineBlue p-4 shadow-sm">
           <input type="checkbox" className="mr-3 accent-purplishBlue" />
           <div>
             <h4 className="text-marineBlue">Online service</h4>
@@ -18,7 +18,7 @@ function Step3() {
           <div className="ml-auto text-purplishBlue">+$1/mo</div>
         </label>
 
-        <label className="flex items-center gap-2 rounded-md border border-marineBlue p-4 shadow-sm">
+        <label className="flex select-none items-center gap-2 rounded-md border border-marineBlue p-4 shadow-sm">
           <input type="checkbox" className="mr-3 accent-purplishBlue" />
           <div>
             <h4 className="text-marineBlue">Larger storage</h4>
@@ -27,7 +27,7 @@ function Step3() {
           <div className="ml-auto text-purplishBlue">+$2/mo</div>
         </label>
 
-        <label className="flex items-center gap-2 rounded-md border border-marineBlue p-4 shadow-sm">
+        <label className="flex select-none items-center gap-2 rounded-md border border-marineBlue p-4 shadow-sm">
           <input type="checkbox" className="mr-3 accent-purplishBlue" />
           <div>
             <h4 className="text-marineBlue">Customiable profile</h4>
