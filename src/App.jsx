@@ -3,6 +3,7 @@ import Step1 from './components/Step1';
 import Step2 from './components/Step2';
 import Step3 from './components/Step3';
 import Step4 from './components/Step4';
+import Step5 from './components/Step5';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -123,7 +124,7 @@ function App() {
           <div className="flex gap-4 pt-10 md:items-center md:pt-0">
             <div
               className={`grid h-10 w-10 place-items-center  rounded-full border text-xl ${
-                step === 4
+                step === 4 || step === 5
                   ? 'border-lightBlue bg-lightBlue text-black'
                   : 'border-white text-white'
               }`}
@@ -133,7 +134,7 @@ function App() {
             <div className="hidden text-sm uppercase md:block">
               <p className="text-coolGray">Step 4</p>
               <p
-                className={`text-lg transition-colors duration-300 ${step === 4 ? 'text-white' : 'text-stone-300'}`}
+                className={`text-lg transition-colors duration-300 ${step === 4 || step === 5 ? 'text-white' : 'text-stone-300'}`}
               >
                 Summary
               </p>
@@ -141,13 +142,14 @@ function App() {
           </div>
         </div>
         <form className="relative mx-auto -mt-16 mb-24 h-[620px] w-[90%]  grow overflow-y-auto md:mb-0 md:mt-0 md:w-full md:bg-white md:p-10">
-          <div className="mx-auto  rounded-xl bg-white px-5 py-10 md:px-10 md:pb-32 md:pt-0">
+          <div className="mx-auto h-full rounded-xl bg-white px-5 py-10 md:px-10 md:pb-32 md:pt-0">
             {step === 1 && <Step1 dispatch={dispatch} />}
             {step === 2 && (
               <Step2 dispatch={dispatch} plan={plan} planType={planType} />
             )}
             {step === 3 && <Step3 dispatch={dispatch} />}
             {step === 4 && <Step4 dispatch={dispatch} />}
+            {step === 5 && <Step5 />}
           </div>
 
           <div
