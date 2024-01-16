@@ -5,6 +5,30 @@ import Step3 from './components/Step3';
 import Step4 from './components/Step4';
 import Step5 from './components/Step5';
 
+const allExtras = [
+  {
+    id: 1,
+    name: 'Online service',
+    description: 'Access to multiplayer games',
+    monPrice: 1,
+    yearPrice: 10,
+  },
+  {
+    id: 2,
+    name: 'Larger storage',
+    description: 'Extra 1TB of cloud save',
+    monPrice: 2,
+    yearPrice: 20,
+  },
+  {
+    id: 3,
+    name: 'Customizable profile',
+    description: 'Custom theme on your profile',
+    monPrice: 2,
+    yearPrice: 20,
+  },
+];
+
 function reducer(state, action) {
   switch (action.type) {
     case 'name/set': {
@@ -35,6 +59,21 @@ function reducer(state, action) {
       console.log(action.payload);
       return { ...state, planType: action.payload };
     }
+
+    case 'extra/add': {
+      return { ...state, extras: [...state.extras, action.payload] };
+    }
+
+    case 'extra/remove': {
+      return {
+        ...state,
+        extras: state.extras.filter((item) => item.id !== action.payload),
+      };
+    }
+
+    default: {
+      throw new Error(`${action.type} not defined`);
+    }
   }
 }
 
@@ -45,6 +84,7 @@ const initalState = {
   name: '',
   email: '',
   phone: '',
+  extras: [],
 };
 
 function App() {
@@ -158,7 +198,9 @@ function App() {
           <div className="mx-auto h-full rounded-xl bg-white px-5 py-10 md:px-10 md:pb-32 md:pt-0">
             {step === 1 && <Step1 dispatch={dispatch} state={state} />}
             {step === 2 && <Step2 dispatch={dispatch} state={state} />}
-            {step === 3 && <Step3 dispatch={dispatch} />}
+            {step === 3 && (
+              <Step3 dispatch={dispatch} state={state} allExtras={allExtras} />
+            )}
             {step === 4 && <Step4 dispatch={dispatch} />}
             {step === 5 && <Step5 />}
           </div>
