@@ -56,19 +56,33 @@ const allPlans = [
 function reducer(state, action) {
   switch (action.type) {
     case 'name/set': {
-      return { ...state, name: action.payload };
+      return { ...state, name: { ...state.name, value: action.payload } };
+    }
+    case 'name/setError': {
+      return { ...state, name: { ...state.name, error: action.payload } };
     }
     case 'email/set': {
-      return { ...state, email: action.payload };
+      return { ...state, email: { ...state.email, value: action.payload } };
+    }
+    case 'email/setError': {
+      return { ...state, email: { ...state.email, error: action.payload } };
     }
     case 'phone/set': {
-      return { ...state, phone: action.payload };
+      return { ...state, phone: { ...state.phone, value: action.payload } };
+    }
+    case 'phone/setError': {
+      return { ...state, phone: { ...state.phone, error: action.payload } };
     }
     case 'steps/set': {
       return { ...state, step: action.payload };
     }
     case 'steps/next': {
-      return { ...state, step: state.step + 1 };
+      return {
+        ...state,
+        step: state.step + 1,
+        showErrors: false,
+        isValid: false,
+      };
     }
 
     case 'steps/prev': {
@@ -99,6 +113,10 @@ function reducer(state, action) {
       return { ...state, isValid: action.payload };
     }
 
+    case 'showErrors/set': {
+      return { ...state, showErrors: action.payload };
+    }
+
     default: {
       throw new Error(`${action.type} not defined`);
     }
@@ -109,17 +127,18 @@ const initalState = {
   step: 1,
   planType: 'monthly',
   plan: allPlans.at(0),
-  isValid: false,
-  name: '',
-  email: '',
-  phone: '',
+  isValid: null,
+  showErrors: false,
+  name: { value: '', error: '' },
+  email: { value: '', error: '' },
+  phone: { value: '', error: '' },
   extras: [],
 };
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initalState);
   const { step, isValid } = state;
-
+  console.log('valid ', isValid);
   function handleNextStep(e) {
     e.preventDefault();
 
@@ -127,6 +146,7 @@ function App() {
       dispatch({ type: 'steps/next' });
     } else {
       // show errors
+      dispatch({ type: 'showErrors/set', payload: true });
     }
   }
 

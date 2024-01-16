@@ -1,5 +1,13 @@
+import { useEffect } from 'react';
+
 function Step3({ state, dispatch, allExtras }) {
   const { planType, extras } = state;
+  useEffect(
+    function () {
+      dispatch({ type: 'valid/set', payload: true });
+    },
+    [dispatch],
+  );
   return (
     <>
       <h2 className="mb-4 text-2xl font-bold text-marineBlue md:text-4xl">

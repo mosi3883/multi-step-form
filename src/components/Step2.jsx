@@ -1,5 +1,16 @@
+import { useEffect } from 'react';
+
 function Step2({ dispatch, state, allPlans }) {
   const { plan, planType } = state;
+
+  useEffect(
+    function () {
+      if (plan && planType) {
+        dispatch({ type: 'valid/set', payload: true });
+      }
+    },
+    [dispatch, planType, plan],
+  );
   return (
     <>
       <h2 className="mb-4 text-2xl font-bold text-marineBlue md:text-4xl">
