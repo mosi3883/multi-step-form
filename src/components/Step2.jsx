@@ -1,4 +1,4 @@
-function Step2({ dispatch, state }) {
+function Step2({ dispatch, state, allPlans }) {
   const { plan, planType } = state;
   return (
     <>
@@ -10,63 +10,32 @@ function Step2({ dispatch, state }) {
       </p>
 
       <div className="mb-8 flex select-none flex-col gap-3 md:flex-row">
-        <div
-          className={`flex flex-1 cursor-pointer items-center gap-4 rounded-md border px-4 py-2 hover:border-marineBlue md:flex-col md:items-start md:gap-7 ${plan === 'arcade' ? 'border-marineBlue bg-magnolia' : ''}`}
-          onClick={() => dispatch({ type: 'plan/set', payload: 'arcade' })}
-        >
-          <img src="/images/icon-arcade.svg" alt="" />
-          <div>
-            <p className="text-2xl text-marineBlue">Arcade</p>
-            <p className="text-coolGray">
-              {planType === 'monthly' ? '$9/mo' : '$90/yr'}
-            </p>
-            <>
-              {planType === 'yearly' ? (
-                <p className="mt-2 text-sm text-marineBlue">two months free</p>
-              ) : (
-                ''
-              )}
-            </>
+        {allPlans.map((item) => (
+          <div
+            key={item.id}
+            className={`flex flex-1 cursor-pointer items-center gap-4 rounded-md border px-4 py-2 hover:border-marineBlue md:flex-col md:items-start md:gap-7 ${plan.id === item.id ? 'border-marineBlue bg-magnolia' : ''}`}
+            onClick={() => dispatch({ type: 'plan/set', payload: item })}
+          >
+            <img src={item.img} alt={item.name} />
+            <div>
+              <p className="text-2xl text-marineBlue">{item.name}</p>
+              <p className="text-coolGray">
+                {planType === 'monthly'
+                  ? `$${item.monPrice}/mo`
+                  : `$${item.yearPrice}/yr`}
+              </p>
+              <>
+                {planType === 'yearly' ? (
+                  <p className="mt-2 text-sm text-marineBlue">
+                    two months free
+                  </p>
+                ) : (
+                  ''
+                )}
+              </>
+            </div>
           </div>
-        </div>
-        <div
-          className={`flex flex-1 cursor-pointer items-center gap-4 rounded-md border px-4 py-2 hover:border-marineBlue md:flex-col md:items-start md:gap-7 ${plan === 'advanced' ? 'border-marineBlue bg-magnolia' : ''}`}
-          onClick={() => dispatch({ type: 'plan/set', payload: 'advanced' })}
-        >
-          <img src="/images/icon-advanced.svg" alt="" />
-          <div>
-            <p className="text-2xl text-marineBlue">Advanced</p>
-            <p className="text-coolGray">
-              {planType === 'monthly' ? '$12/mo' : '$120/yr'}
-            </p>
-            <>
-              {planType === 'yearly' ? (
-                <p className="mt-2 text-sm text-marineBlue">two months free</p>
-              ) : (
-                ''
-              )}
-            </>
-          </div>
-        </div>
-        <div
-          className={`flex flex-1 cursor-pointer items-center gap-4 rounded-md border px-4 py-2 hover:border-marineBlue md:flex-col md:items-start md:gap-7 ${plan === 'pro' ? 'border-marineBlue bg-magnolia' : ''}`}
-          onClick={() => dispatch({ type: 'plan/set', payload: 'pro' })}
-        >
-          <img src="/images/icon-pro.svg" alt="" />
-          <div>
-            <p className="text-2xl text-marineBlue">Pro</p>
-            <p className="text-coolGray">
-              {planType === 'monthly' ? '$15/mo' : '$150/yr'}
-            </p>
-            <>
-              {planType === 'yearly' ? (
-                <p className="mt-2 text-sm text-marineBlue">two months free</p>
-              ) : (
-                ''
-              )}
-            </>
-          </div>
-        </div>
+        ))}
       </div>
 
       <div className="flex items-center justify-center  gap-3 bg-alabaster md:px-6 md:py-4">

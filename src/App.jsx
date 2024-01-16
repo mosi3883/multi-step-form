@@ -29,6 +29,30 @@ const allExtras = [
   },
 ];
 
+const allPlans = [
+  {
+    id: 1,
+    name: 'Arcade',
+    img: '/images/icon-arcade.svg',
+    monPrice: 9,
+    yearPrice: 90,
+  },
+  {
+    id: 2,
+    name: 'Advanced',
+    img: '/images/icon-advanced.svg',
+    monPrice: 12,
+    yearPrice: 120,
+  },
+  {
+    id: 3,
+    name: 'Pro',
+    img: '/images/icon-pro.svg',
+    monPrice: 15,
+    yearPrice: 150,
+  },
+];
+
 function reducer(state, action) {
   switch (action.type) {
     case 'name/set': {
@@ -80,7 +104,7 @@ function reducer(state, action) {
 const initalState = {
   step: 1,
   planType: 'monthly',
-  plan: '',
+  plan: allPlans.at(0),
   name: '',
   email: '',
   phone: '',
@@ -197,11 +221,13 @@ function App() {
         <form className="relative mx-auto -mt-16 mb-24 h-[620px] w-[90%]  grow overflow-y-auto md:mb-0 md:mt-0 md:w-full md:bg-white md:p-10">
           <div className="mx-auto h-full rounded-xl bg-white px-5 py-10 md:px-10 md:pb-32 md:pt-0">
             {step === 1 && <Step1 dispatch={dispatch} state={state} />}
-            {step === 2 && <Step2 dispatch={dispatch} state={state} />}
+            {step === 2 && (
+              <Step2 dispatch={dispatch} state={state} allPlans={allPlans} />
+            )}
             {step === 3 && (
               <Step3 dispatch={dispatch} state={state} allExtras={allExtras} />
             )}
-            {step === 4 && <Step4 dispatch={dispatch} />}
+            {step === 4 && <Step4 dispatch={dispatch} state={state} />}
             {step === 5 && <Step5 />}
           </div>
 

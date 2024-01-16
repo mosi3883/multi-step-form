@@ -1,4 +1,10 @@
-function Step4({ dispatch }) {
+function Step4({ dispatch, state }) {
+  const { plan, planType, extras } = state;
+  const totalPrice =
+    planType === 'monthly'
+      ? plan.monPrice + extras.reduce((acc, cur) => acc + cur.monPrice, 0)
+      : plan.yearPrice + extras.reduce((acc, cur) => acc + cur.yearPrice, 0);
+  console.log(totalPrice);
   function handleTypeChange(e) {
     e.preventDefault();
 
@@ -17,7 +23,7 @@ function Step4({ dispatch }) {
         <div className="mb-4 flex items-center justify-between">
           <div className="flex flex-col gap-0">
             <span className="text-lg font-semibold text-marineBlue">
-              Arcade(Monthly)
+              {plan.name}({planType})
             </span>
             <a
               href="#"
@@ -27,24 +33,35 @@ function Step4({ dispatch }) {
               Change
             </a>
           </div>
-          <span className="font-semibold text-marineBlue">$9/mo</span>
+          <span className="font-semibold text-marineBlue">
+            {planType === 'monthly'
+              ? `$${plan.monPrice}/mo`
+              : `$${plan.yearPrice}/yr`}
+          </span>
         </div>
         {/* list of add-ons */}
         <ul className="space-y-2 pt-4">
-          <li className="flex items-center justify-between">
-            <span className="text-coolGray">Online service</span>
-            <span className="text-sm text-marineBlue">+$1/mo</span>
-          </li>
-          <li className="flex items-center justify-between">
-            <span className="text-coolGray">Larger storage</span>
-            <span className="text-sm text-marineBlue">+$2/mo</span>
-          </li>
+          {extras.map((item) => (
+            <li key={item.id} className="flex items-center justify-between">
+              <span className="text-coolGray">{item.name}</span>
+              <span className="text-sm text-marineBlue">
+                +$
+                {planType === 'monthly'
+                  ? `${item.monPrice}/mo`
+                  : `${item.yearPrice}/yr`}
+              </span>
+            </li>
+          ))}
         </ul>
       </div>
 
       <div className=" flex items-center justify-between px-6 py-4">
-        <span className="text-coolGray">Total(per month)</span>
-        <span className="text-xl font-semibold text-purplishBlue">$12/mo</span>
+        <span className="text-coolGray">
+          Total(per {planType === 'monthly' ? 'Month' : 'Year'})
+        </span>
+        <span className="text-xl font-semibold text-purplishBlue">
+          ${totalPrice}/{planType === 'monthly' ? `mo` : `yr`}
+        </span>
       </div>
     </>
   );

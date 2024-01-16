@@ -18,7 +18,7 @@ function Step3({ state, dispatch, allExtras }) {
             <input
               type="checkbox"
               className="mr-3 accent-purplishBlue"
-              checked={extras.find((ex) => ex.id === item.id)}
+              checked={extras.find((ex) => ex.id === item.id) ?? false}
               onChange={function (e) {
                 if (e.target.checked) {
                   dispatch({
