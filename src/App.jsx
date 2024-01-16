@@ -95,6 +95,10 @@ function reducer(state, action) {
       };
     }
 
+    case 'valid/set': {
+      return { ...state, isValid: action.payload };
+    }
+
     default: {
       throw new Error(`${action.type} not defined`);
     }
@@ -105,6 +109,7 @@ const initalState = {
   step: 1,
   planType: 'monthly',
   plan: allPlans.at(0),
+  isValid: false,
   name: '',
   email: '',
   phone: '',
@@ -113,12 +118,16 @@ const initalState = {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initalState);
-  const { step } = state;
+  const { step, isValid } = state;
 
   function handleNextStep(e) {
     e.preventDefault();
 
-    dispatch({ type: 'steps/next' });
+    if (isValid) {
+      dispatch({ type: 'steps/next' });
+    } else {
+      // show errors
+    }
   }
 
   function handleSubmit(e) {

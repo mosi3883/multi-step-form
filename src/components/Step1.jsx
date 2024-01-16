@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 function Step1({ state, dispatch }) {
   const { name, email, phone } = state;
   function nameChangeHandler(e) {
@@ -9,6 +11,17 @@ function Step1({ state, dispatch }) {
   function phoneChangeHandler(e) {
     dispatch({ type: 'phone/set', payload: e.target.value });
   }
+
+  useEffect(
+    function () {
+      // check validation
+      // if ok change isValid to true
+      if (name.length > 0 && email.length > 0 && phone.length === 11) {
+        dispatch({ type: 'valid/set', payload: true });
+      }
+    },
+    [name, email, phone, dispatch],
+  );
   return (
     <>
       <h2 className="mb-4 text-2xl font-bold text-marineBlue md:text-4xl">
