@@ -7,6 +7,15 @@ import Step5 from './components/Step5';
 
 function reducer(state, action) {
   switch (action.type) {
+    case 'name/set': {
+      return { ...state, name: action.payload };
+    }
+    case 'email/set': {
+      return { ...state, email: action.payload };
+    }
+    case 'phone/set': {
+      return { ...state, phone: action.payload };
+    }
     case 'steps/set': {
       return { ...state, step: action.payload };
     }
@@ -33,10 +42,14 @@ const initalState = {
   step: 1,
   planType: 'monthly',
   plan: '',
+  name: '',
+  email: '',
+  phone: '',
 };
 
 function App() {
-  const [{ step, plan, planType }, dispatch] = useReducer(reducer, initalState);
+  const [state, dispatch] = useReducer(reducer, initalState);
+  const { step } = state;
 
   function handleNextStep(e) {
     e.preventDefault();
@@ -143,10 +156,8 @@ function App() {
         </div>
         <form className="relative mx-auto -mt-16 mb-24 h-[620px] w-[90%]  grow overflow-y-auto md:mb-0 md:mt-0 md:w-full md:bg-white md:p-10">
           <div className="mx-auto h-full rounded-xl bg-white px-5 py-10 md:px-10 md:pb-32 md:pt-0">
-            {step === 1 && <Step1 dispatch={dispatch} />}
-            {step === 2 && (
-              <Step2 dispatch={dispatch} plan={plan} planType={planType} />
-            )}
+            {step === 1 && <Step1 dispatch={dispatch} state={state} />}
+            {step === 2 && <Step2 dispatch={dispatch} state={state} />}
             {step === 3 && <Step3 dispatch={dispatch} />}
             {step === 4 && <Step4 dispatch={dispatch} />}
             {step === 5 && <Step5 />}

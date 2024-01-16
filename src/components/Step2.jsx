@@ -1,4 +1,5 @@
-function Step2({ dispatch, plan, planType }) {
+function Step2({ dispatch, state }) {
+  const { plan, planType } = state;
   return (
     <>
       <h2 className="mb-4 text-2xl font-bold text-marineBlue md:text-4xl">
